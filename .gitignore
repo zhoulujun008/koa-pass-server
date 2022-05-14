@@ -1,0 +1,8 @@
+/node_modules/
+/public/upload/
+/backdb.sql
+/bak.md
+/const/index.js
+/ssl
+/config/defualt.js
+.idea
