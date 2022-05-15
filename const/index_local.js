@@ -1,5 +1,5 @@
 module.exports = {
-  TokenGlobal: 'Gopal_token',
+  TokenGlobal: 'test_token',
   uploadUrl: 'https://www.zhoulujun.cn:3000/upload/',
   // Port: 443,
   dev:'product',
