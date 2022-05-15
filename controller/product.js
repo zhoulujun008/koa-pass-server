@@ -4,8 +4,12 @@ module.exports = {
   async getList(ctx) {
     try {
       const limit = ctx.query?.limit
+      const keyword = ctx.query?.keyword
       let sql = `select id, name, description, serial, img
                  from product;`
+      if(keyword){
+        sql = `select id, name, description, serial, img from product where name like '%${keyword}%' and serial like '%${keyword}%';`
+      }
       if(limit){
         sql = `select id, name, description, serial, img
                from product limit 0,${Number(limit)} ;`
@@ -56,8 +60,8 @@ module.exports = {
   async add(ctx) {
     const { name, description, serial, img } = ctx.request.body
     const create_time = new Date().getTime()
-    sql = `insert into product(name, description, serial, img,create_time)
-             value('${name}','${description}','${serial}','${img}',${create_time});`
+    sql = `insert into product(name, description, serial, img)
+             value('${name}','${description}','${serial}','${img}');`
     const data = await mysql.query(sql)
     ctx.body = {
       'result': true,

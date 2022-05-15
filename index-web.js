@@ -6,7 +6,7 @@ const koaJwt = require('koa-jwt');
 const config = require('./config/defualt')
 
 
-const router = require('./router/router');
+const router = require('./router/router-web');
 const Const = require('./const/index');
 const fs = require('fs');
 

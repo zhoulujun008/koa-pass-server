@@ -52,8 +52,8 @@ module.exports = {
   async add(ctx) {
     const { name, description, serial, img,tel,remark } = ctx.request.body
     const create_time = new Date().getTime()
-    sql = `insert into service(name, description, serial, img,tel,remark,create_time)
-             value('${name}','${description}','${serial}','${img}','${tel}','${remark}','${create_time}');`
+    sql = `insert into service(name, description, serial, img,tel,remark)
+             value('${name}','${description}','${serial}','${img}','${tel}','${remark}');`
     const data = await mysql.query(sql)
     ctx.body = {
       'result': true,

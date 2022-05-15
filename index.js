@@ -4,17 +4,13 @@ const views = require('koa-views');
 const static = require('koa-static');
 const koaBody = require('koa-body');
 const cors = require('koa2-cors');
-const koaJwt = require('koa-jwt');
-
-const config = require('./config/defualt')
 const path = require('path')
 
 
-const router = require('./router/router-admin');
+const router = require('./router/router');
 const Const = require('./const/index');
 const fs = require('fs');
-const { default: sslify } = require('koa-sslify');
-const https = require('https');
+
 
 
 let app = new Koa();
@@ -35,32 +31,8 @@ app.use(koaBody({
      },*/
   }
 }))
-//这是处理前端跨域的配置
-app.use(cors(
-    {
-      /* origin: function (ctx) {
-         // if (ctx.url === '/login') {
-         //   return "*"; // 允许来自所有域名请求
-         // }
-         return '*';
-       },*/
-      exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
-      maxAge: 5,
-      credentials: true,
-      allowMethods: ['GET', 'POST', 'DELETE'],
-      allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
-    }
-));
-app.use(koaJwt({
-  secret: Const.TokenGlobal
-}).unless({ // 配置白名单
-  method: 'get',
-  path: [
-    /\/api\/register/,
-    /\/api\/login/,
-    /\/api\/img/
-  ]
-}))
+
+
 
 // 错误处理
 app.use((ctx, next) => {
@@ -94,19 +66,18 @@ if (Const.dev === 'product') {
     key: fs.readFileSync(__dirname + '/ssl/www.zhoulujun.co.key'),
     cert: fs.readFileSync(__dirname + '/ssl/www.zhoulujun.co_bundle.pem'),
   }
-  https.createServer(options, app.callback()).listen(config.port, (err) => {
+  https.createServer(options, app.callback()).listen(Const.Port, (err) => {
     if (err) {
       console.log('服务启动出错', err);
     } else {
       // db.connect();  // 数据库连接
-      console.log('guessWord-server运行在' + config.port + '端口');
+      console.log('guessWord-server运行在' + Const.Port + '端口');
     }
   });
 } else {
-  app.listen(config.port)
+  app.listen(Const.Port)
 }
-
 
 //
 
-console.log(`listening on port ${config.port}`)
+console.log(`listening on port ${Const.Port}`)

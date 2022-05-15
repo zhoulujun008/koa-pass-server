@@ -1,6 +1,6 @@
 const Router = require('koa-router')
 const newsRouter = new Router({
-  prefix: '/api' //前缀
+  prefix: '/web' //前缀
 })
 const productController = require('../controller/product')
 const exampleController = require('../controller/example')

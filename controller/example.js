@@ -3,7 +3,7 @@ const mysql = require('../mysql');
 module.exports = {
   async getList(ctx) {
     try {
-      const sql = `select id, name, description, serial, img
+      const sql = `select id, name, description, serial, img ,recommend
                    from example;`
       const data = await mysql.query(sql)
       ctx.body = {
@@ -21,7 +21,7 @@ module.exports = {
   },
   async getRecommendList(ctx) {
     try {
-      const recommend = ctx.query?.recommend || 0
+      const recommend = ctx.query?.recommend || 1
       const sql = `select id, name, description, serial, img
                    from example
                    where recommend = ${Number(recommend)};`
@@ -42,7 +42,7 @@ module.exports = {
   async get(ctx) {
     try {
       const id = ctx.params.id
-      const sql = `select name, description, serial, img
+      const sql = `select name, description, serial, img ,recommend
                    from example
                    where id = ${id};`
       const data = await mysql.query(sql)
@@ -70,9 +70,8 @@ module.exports = {
   },
   async add(ctx) {
     const { name, description, serial, img, recommend } = ctx.request.body
-    const create_time = new Date().getTime()
-    sql = `insert into example(name, description, serial, img, recommend, create_time)
-             value('${name}','${description}','${serial}','${img}','${create_time}');`
+    sql = `insert into example(name, description, serial, img, recommend)
+             value('${name}','${description}','${serial}','${img}','${recommend}');`
     const data = await mysql.query(sql)
     ctx.body = {
       'result': true,
@@ -88,7 +87,7 @@ module.exports = {
                      description='${description}',
                      serial='${serial}',
                      img='${img}',
-                     recommend='${recommend}'
+                     recommend=${recommend||0}
                  where id = '${id}';`
 
     // const { name, description, serial, img, recommend } = ctx.request.body

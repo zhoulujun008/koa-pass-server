@@ -17,6 +17,7 @@ module.exports = {
                where \`user\` = "${user}"
                  AND \`password\` = "${password}";`
     const data = await mysql.query(sql)
+    console.log(data)
     if (data?.length===1) {
       const user = data[0]
       let token = addToken(user)  //token中要携带的信息，自己定义
