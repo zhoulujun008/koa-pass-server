@@ -3,7 +3,6 @@ const Koa = require('koa')
 const views = require('koa-views');
 const static = require('koa-static');
 const koaBody = require('koa-body');
-const cors = require('koa2-cors');
 const path = require('path')
 
 
@@ -63,8 +62,8 @@ if (Const.dev === 'product') {
   const sslify = require('koa-sslify').default
   app.use(sslify())
   const options = {
-    key: fs.readFileSync(__dirname + '/ssl/www.zhoulujun.co.key'),
-    cert: fs.readFileSync(__dirname + '/ssl/www.zhoulujun.co_bundle.pem'),
+    key: fs.readFileSync(__dirname + '/ssl/www.sekocnc.cn.key'),
+    cert: fs.readFileSync(__dirname + '/ssl/www.sekocnc.cn_bundle.pem'),
   }
   https.createServer(options, app.callback()).listen(Const.Port, (err) => {
     if (err) {

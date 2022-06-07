@@ -3,10 +3,6 @@
   "version": "0.0.1",
   "private": true,
   "description": "蓝鲸图表平台",
-  "engines": {
-    "node": "^v14.19.0",
-    "npm": "^6.14.16"
-  },
   "scripts": {
     "start": "nodemon node pass-server/index.js",
     "server": "node pass-server/index.js",
