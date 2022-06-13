@@ -2,8 +2,9 @@
 /public/upload/
 /backdb.sql
 /bak.md
-/const/index.js
+/const/
 /ssl
 /config/defualt.js
 .idea
 /test.sql
+.codecc

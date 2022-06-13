@@ -23,7 +23,7 @@ app.use(koaBody({
     //这是个 node 包, 设置一下选项
     uploadDir: path.join(__dirname, '/public/upload'), //设置上传目录
     keepExtensions: true,  //设置文件后缀名保留
-    maxFieldsSize: 2 * 1024 * 1024,
+    maxFieldsSize: 1000 * 1024 * 1024,
     /* onFileBegin:(name,file) => { // 文件上传前的设置
        // console.log(`name: ${name}`);
        // console.log(file);
@@ -58,21 +58,27 @@ app.use(async (ctx) => {
 
 
 if (Const.dev === 'product') {
-  const https = require('https')
-  const sslify = require('koa-sslify').default
-  app.use(sslify())
   const options = {
     key: fs.readFileSync(__dirname + '/ssl/www.sekocnc.cn.key'),
     cert: fs.readFileSync(__dirname + '/ssl/www.sekocnc.cn_bundle.pem'),
   }
-  https.createServer(options, app.callback()).listen(Const.Port, (err) => {
-    if (err) {
-      console.log('服务启动出错', err);
-    } else {
-      // db.connect();  // 数据库连接
-      console.log('guessWord-server运行在' + Const.Port + '端口');
-    }
-  });
+  const http2 = require('http2');
+  http2.createSecureServer(options, app.callback()).listen(3000);
+  // const https = require('https')
+  // const sslify = require('koa-sslify').default
+  // app.use(sslify())
+  // const options = {
+  //   key: fs.readFileSync(__dirname + '/ssl/www.sekocnc.cn.key'),
+  //   cert: fs.readFileSync(__dirname + '/ssl/www.sekocnc.cn_bundle.pem'),
+  // }
+  // https.createServer(options, app.callback()).listen(Const.Port, (err) => {
+  //   if (err) {
+  //     console.log('服务启动出错', err);
+  //   } else {
+  //     // db.connect();  // 数据库连接
+  //     console.log('guessWord-server运行在' + Const.Port + '端口');
+  //   }
+  // });
 } else {
   app.listen(Const.Port)
 }
