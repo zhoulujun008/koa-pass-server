@@ -1,0 +1,8 @@
+/node_modules/
+/const/
+/config/
+/ssl/
+/token/
+/test.sql
+/build.yml
+/.idea/

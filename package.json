@@ -1,0 +1,32 @@
+{
+  "name": "koa-admin-https",
+  "version": "0.0.1",
+  "private": true,
+  "description": "蓝鲸图表平台",
+  "scripts": {
+    "start": "nodemon node index.js",
+    "server": "node index.js",
+    "web": "node pass-server/index-web.js"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "eslint": "^7.27.0"
+  },
+  "dependencies": {
+    "@koa/router": "^10.1.1",
+    "http2": "^3.3.7",
+    "https": "^1.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "koa": "^2.13.4",
+    "koa-body": "^5.0.0",
+    "koa-jwt": "^4.0.3",
+    "koa-router": "^10.1.1",
+    "koa-sslify": "^5.0.0",
+    "koa-static": "^5.0.0",
+    "koa-views": "^8.0.0",
+    "koa2-cors": "^2.0.6",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.15"
+  },
+  "license": "MIT"
+}
